@@ -16,11 +16,25 @@ class Player:
         pass
 
 
-""" RAndom player picks random moves in random"""
+""" Random player picks random moves in random"""
 
 class randomPlayer:
     def move(self):
         return (random.choice(moves))
+
+
+"""Human Player recieves user input"""
+class humanPlayer:
+    def move(self):
+        while True:
+            userResponse: input("Pick Rock, Paper or Scissors").lower()
+            if userResponse not in moves:
+                print("Invalid Response. Select Rock, Paper or Response")
+            else:
+                break
+        return userResponse     
+
+
 
 
 def beats(one, two):
