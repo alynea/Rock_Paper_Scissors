@@ -18,22 +18,30 @@ class Player:
 
 """ Random player picks random moves in random"""
 
-class randomPlayer:
+class RandomPlayer(Player):
     def move(self):
         return (random.choice(moves))
 
 
 """Human Player recieves user input"""
-class humanPlayer:
+class HumanPlayer(Player):
     def move(self):
         while True:
-            userResponse: input("Pick Rock, Paper or Scissors").lower()
+            userResponse = input("Pick Rock, Paper or Scissors\n").lower()
             if userResponse not in moves:
-                print("Invalid Response. Select Rock, Paper or Response")
+                print("Invalid Response. Select Rock, Paper or Response\n")
             else:
                 break
         return userResponse     
 
+class CyclePlayer(Player):
+    def move(self):
+        for move in moves:
+            cyclePlayer_move = move
+            
+
+        
+    
 
 
 
@@ -52,6 +60,16 @@ class Game:
         move1 = self.p1.move()
         move2 = self.p2.move()
         print(f"Player 1: {move1}  Player 2: {move2}")
+
+        isPlayerOneWin = beats(move1, move2)
+        
+        if isPlayerOneWin is True:
+            print(f"Player 1 won!")
+        elif move1 == move2:
+            print(f"No winner in this round!")
+        else:
+            print(f"Player 2 won!")
+        
         self.p1.learn(move1, move2)
         self.p2.learn(move2, move1)
 
@@ -64,5 +82,5 @@ class Game:
 
 
 if __name__ == '__main__':
-    game = Game(Player(), Player())
+    game = Game(Player(), CyclePlayer())
     game.play_game()
