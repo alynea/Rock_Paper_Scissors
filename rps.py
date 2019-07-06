@@ -32,15 +32,31 @@ class HumanPlayer(Player):
                 print("Invalid Response. Select Rock, Paper or Response\n")
             else:
                 break
-        return userResponse     
+        return userResponse
+
 
 class CyclePlayer(Player):
-    def move(self):
-        for move in moves:
-            cyclePlayer_move = move
-            
+    cyclePlayer_move = ""
 
-        
+    def learn(self,my_move,their_move):
+        self.cyclePlayer_move = my_move
+
+    def move(self):                
+        if  self.cyclePlayer_move == "scissors":
+            self.cyclePlayer_move = "rock"
+            return "rock"
+        elif self.cyclePlayer_move == "rock":
+            self.cyclePlayer_move = "paper"
+            return "paper"
+        elif self.cyclePlayer_move == "paper":
+            self.cyclePlayer_move = "scissors"
+            return "scissors"
+        else:
+            return "rock"
+
+
+             
+       
     
 
 
