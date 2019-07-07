@@ -9,9 +9,10 @@ in this game"""
 
 
 class Player:
+ 
     def __init__(self):
-        my_move = None
-        their_move = None
+        self.my_move = None
+        self.their_move = None
 
 
     def move(self):
@@ -39,6 +40,8 @@ class HumanPlayer(Player):
                 break
         return userResponse
 
+
+
 """Cycle Player cycles through the moves list"""
 class CyclePlayer(Player):
     cyclePlayer_move = ""
@@ -59,6 +62,8 @@ class CyclePlayer(Player):
         else:
             return "rock"
 
+
+
 """Reflect Player reflects the move of the other player"""
 class ReflectPlayer(Player):
     
@@ -69,7 +74,8 @@ class ReflectPlayer(Player):
 
     def move(self):
         if self.their_move is None:
-            return (random.choice(moves))
+            self.my_move = (random.choice(moves))
+            return  self.my_move
         else:
             return self.their_move
 
@@ -115,5 +121,5 @@ class Game:
 
 
 if __name__ == '__main__':
-    game = Game(Player(), ReflectPlayer())
+    game = Game(RandomPlayer(), ReflectPlayer())
     game.play_game()
