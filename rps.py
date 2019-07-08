@@ -13,14 +13,19 @@ class Player:
     def __init__(self):
         self.my_move = None
         self.their_move = None
+        self.score = 0
 
 
     def move(self):
         return 'rock'
 
+
     def learn(self, my_move, their_move):
         pass
 
+
+    def increment_score(self):
+        self.score += 1
 
 """ Random player picks random moves in random"""
 
@@ -104,22 +109,37 @@ class Game:
         
         if isPlayerOneWin is True:
             print(f"Player 1 won!")
+            self.p1.increment_score()
         elif move1 == move2:
             print(f"No winner in this round!")
         else:
             print(f"Player 2 won!")
+            self.p2.increment_score()
         
         self.p1.learn(move1, move2)
         self.p2.learn(move2, move1)
 
     def play_game(self):
         print("Game start!")
-        for round in range(3):
-            print(f"Round {round}:")
-            self.play_round()
-        print("Game over!")
+        i=0
+        while True:  
+            i += 1          
+            newRound = input("Would you like to play? Y/N\n").upper()
+            if newRound == "Y":
+                print(f"Round {i}:")
+                self.play_round()
+            elif newRound == "N":
+                print("Game over!")
+                break
+            else:
+                print("Invalid input. Enter Y/N\n")
+                
 
 
 if __name__ == '__main__':
-    game = Game(RandomPlayer(), ReflectPlayer())
+    player1 = CyclePlayer()
+    player2 = ReflectPlayer()
+    game = Game(player1, player2)
     game.play_game()
+
+    print(f"Player 1 score:{player1.score} and Player 2 score:{player2.score}")
