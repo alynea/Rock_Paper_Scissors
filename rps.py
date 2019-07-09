@@ -130,8 +130,8 @@ class Game:
 
 
 if __name__ == '__main__':
-    player1 = ReflectPlayer()
-    player2 = CyclePlayer()
+    player1 = RandomPlayer()
+    player2 = HumanPlayer()
     game = Game(player1, player2)
     game.play_game()
     print(f"Player 1 score:{player1.score} and Player 2 score:{player2.score}")
